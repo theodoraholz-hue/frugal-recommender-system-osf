@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it as below."
+title: "Frugal Evaluation of Recommender Systems in Territorial Marketing: A Reproducible Computational Systematic Review"
+authors:
+  - family-names: Holz
+    given-names: Theodora
+date-released: 2026-06-16
+version: 1.0.0
+repository-code: "https://github.com/theodoraholz-hue/frugal-recommender-system-osf"
+license: MIT
+keywords:
+  - systematic review
+  - PRISMA
+  - recommender systems
+  - territorial marketing
+  - computational social science
+  - R pipeline
