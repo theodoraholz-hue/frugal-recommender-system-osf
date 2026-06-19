@@ -1,6 +1,7 @@
 # =========================================================
 # FIGURE - CONCEPTUAL MODEL OF FRUGAL EVALUATION
-# OF RECOMMENDER SYSTEMS IN TERRITORIAL MARKETING
+# RECOMMENDER SYSTEMS IN TERRITORIAL MARKETING
+# Corrected conceptual and technical version
 # =========================================================
 
 # 1) Install packages only if needed
@@ -17,34 +18,32 @@ library(DiagrammeR)
 library(DiagrammeRsvg)
 library(rsvg)
 
-# 3) Define the exact output folder
-output_dir <- "C:/Users/theod/OneDrive/Area de Trabalho/DOUTORADO/ENSAIO/Ensaio_2026-01/ENSAIO OFICIAL"
+# 3) Define output folder
+# By default, files are saved in the current working directory. In RStudio,
+# use setwd() if you want to save them somewhere else.
+output_dir <- getwd()
 
 if (!dir.exists(output_dir)) {
   dir.create(output_dir, recursive = TRUE)
 }
 
-# 4) Define file names
-png_file <- file.path(output_dir, "frugal_recommender_framework.png")
-svg_file <- file.path(output_dir, "frugal_recommender_framework.svg")
+png_file <- file.path(output_dir, "frugal_conceptual_model_english.png")
+svg_file <- file.path(output_dir, "frugal_conceptual_model_english.svg")
 
-# 5) Create the graph
+# 4) Create the graph
 g <- grViz("
-digraph frugal_framework {
+digraph frugal_model {
 
   graph [
     layout = dot,
     rankdir = TB,
-    compound = true,
-    newrank = true,
     bgcolor = white,
-    nodesep = 0.45,
-    ranksep = 0.75,
+    nodesep = 0.55,
+    ranksep = 0.80,
     margin = 0.25,
-    pad = 0.15,
     fontname = 'Times New Roman',
     labelloc = t,
-    label = 'Figure 1. Conceptual model of frugal evaluation of recommender systems in territorial marketing'
+    label = 'Figure 1. Conceptual model for the frugal evaluation of recommender systems in territorial marketing'
   ]
 
   node [
@@ -57,15 +56,13 @@ digraph frugal_framework {
     arrowsize = 0.8,
     penwidth = 1.1,
     fontname = 'Times New Roman',
-    fontsize = 12
+    fontsize = 11
   ]
 
   tensions [
     label = <
       <TABLE BORDER='1' CELLBORDER='0' CELLSPACING='0' CELLPADDING='8'>
-        <TR>
-          <TD BGCOLOR='gainsboro'><B>Tensions motivating the model</B></TD>
-        </TR>
+        <TR><TD BGCOLOR='gainsboro'><B>Tensions motivating the model</B></TD></TR>
         <TR>
           <TD ALIGN='LEFT'>
             (T1) Expansion of AI and recommender systems<BR ALIGN='LEFT'/>
@@ -80,11 +77,12 @@ digraph frugal_framework {
   lens [
     label = <
       <TABLE BORDER='1' CELLBORDER='0' CELLSPACING='0' CELLPADDING='8'>
+        <TR><TD BGCOLOR='gainsboro'><B>Frugality as a theoretical lens</B></TD></TR>
         <TR>
-          <TD BGCOLOR='gainsboro'><B>Frugality as a theoretical lens</B></TD>
-        </TR>
-        <TR>
-          <TD>Reorganises evaluation beyond isolated algorithmic performance.</TD>
+          <TD>
+            Reorganizes evaluation beyond isolated algorithmic performance,<BR/>
+            articulating sufficiency, responsible resource use, and strategic value.
+          </TD>
         </TR>
       </TABLE>
     >
@@ -93,7 +91,6 @@ digraph frugal_framework {
   subgraph cluster_framework {
     label = 'Frugal evaluation framework'
     labelloc = t
-    labeljust = c
     fontsize = 18
     fontname = 'Times New Roman'
     style = rounded
@@ -101,34 +98,28 @@ digraph frugal_framework {
     penwidth = 1.2
     margin = 18
 
-    resource_efficiency [
-      group = left_dimension,
+    functional_fit [
       label = <
         <TABLE BORDER='1' CELLBORDER='0' CELLSPACING='0' CELLPADDING='8'>
-          <TR>
-            <TD BGCOLOR='gainsboro'><B>Resource efficiency</B></TD>
-          </TR>
+          <TR><TD BGCOLOR='gainsboro'><B>Functional fit</B></TD></TR>
           <TR>
             <TD ALIGN='LEFT'>
-              &#8226; Justifiable use of computational, energy and operational resources<BR ALIGN='LEFT'/><BR/>
-              &#8226; Sufficient performance
+              &#8226; Relevance to the marketing and territorial problem<BR ALIGN='LEFT'/>
+              &#8226; Sensitivity to spatial, temporal, and use contexts
             </TD>
           </TR>
         </TABLE>
       >
     ]
 
-    functional_adequacy [
-      group = center_dimension,
+    resource_efficiency [
       label = <
         <TABLE BORDER='1' CELLBORDER='0' CELLSPACING='0' CELLPADDING='8'>
-          <TR>
-            <TD BGCOLOR='gainsboro'><B>Functional adequacy</B></TD>
-          </TR>
+          <TR><TD BGCOLOR='gainsboro'><B>Resource efficiency</B></TD></TR>
           <TR>
             <TD ALIGN='LEFT'>
-              &#8226; Relevance to the marketing and territorial problem<BR ALIGN='LEFT'/><BR/>
-              &#8226; Sensitivity to spatial, temporal and usage context
+              &#8226; Justifiable use of computational, energy, and operational resources<BR ALIGN='LEFT'/>
+              &#8226; Sufficient performance rather than unrestricted maximization
             </TD>
           </TR>
         </TABLE>
@@ -136,127 +127,157 @@ digraph frugal_framework {
     ]
 
     strategic_coherence [
-      group = right_dimension,
       label = <
         <TABLE BORDER='1' CELLBORDER='0' CELLSPACING='0' CELLPADDING='8'>
-          <TR>
-            <TD BGCOLOR='gainsboro'><B>Strategic coherence</B></TD>
-          </TR>
+          <TR><TD BGCOLOR='gainsboro'><B>Strategic coherence</B></TD></TR>
           <TR>
             <TD ALIGN='LEFT'>
-              &#8226; Alignment with territorial marketing objectives<BR ALIGN='LEFT'/><BR/>
-              &#8226; Support for prioritisation, expansion and territorial activation
+              &#8226; Alignment with territorial marketing objectives<BR ALIGN='LEFT'/>
+              &#8226; Support for prioritization, expansion, and territorial activation
             </TD>
           </TR>
         </TABLE>
       >
     ]
 
-    {
-      rank = same
-      resource_efficiency
-      functional_adequacy
-      strategic_coherence
-    }
+    { rank = same; functional_fit; resource_efficiency; strategic_coherence; }
 
-    resource_efficiency -> functional_adequacy [
-      style = invis,
-      weight = 100
-    ]
-
-    functional_adequacy -> strategic_coherence [
-      style = invis,
-      weight = 100
-    ]
-
-    p4node [
+    p1 [
       label = <
-        <TABLE BORDER='0' CELLBORDER='0' CELLSPACING='0' CELLPADDING='2'>
-          <TR><TD><B>P4</B></TD></TR>
-          <TR><TD>Articulation among the three dimensions</TD></TR>
-        </TABLE>
-      >
-    ]
-
-    evaluation [
-      group = center_dimension,
-      label = <
-        <TABLE BORDER='1' CELLBORDER='0' CELLSPACING='0' CELLPADDING='10'>
+        <TABLE BORDER='1' CELLBORDER='0' CELLSPACING='0' CELLPADDING='6'>
+          <TR><TD BGCOLOR='white'><B>P1</B></TD></TR>
           <TR>
-            <TD BGCOLOR='gainsboro'>
-              <B>Frugal evaluation of recommender systems<BR/>
-              in territorial marketing</B>
+            <TD>
+              Evaluate fit with the marketing<BR/>
+              and territorial problem.
             </TD>
           </TR>
         </TABLE>
       >
     ]
 
-    implications [
-      group = center_dimension,
+    p2 [
+      label = <
+        <TABLE BORDER='1' CELLBORDER='0' CELLSPACING='0' CELLPADDING='6'>
+          <TR><TD BGCOLOR='white'><B>P2</B></TD></TR>
+          <TR>
+            <TD>
+              Consider resource efficiency alongside<BR/>
+              conventional performance metrics.
+            </TD>
+          </TR>
+        </TABLE>
+      >
+    ]
+
+    p3 [
+      label = <
+        <TABLE BORDER='1' CELLBORDER='0' CELLSPACING='0' CELLPADDING='6'>
+          <TR><TD BGCOLOR='white'><B>P3</B></TD></TR>
+          <TR>
+            <TD>
+              Evaluate coherence with territorial<BR/>
+              strategic objectives.
+            </TD>
+          </TR>
+        </TABLE>
+      >
+    ]
+
+    { rank = same; p1; p2; p3; }
+
+    p4 [
       label = <
         <TABLE BORDER='1' CELLBORDER='0' CELLSPACING='0' CELLPADDING='8'>
+          <TR><TD BGCOLOR='gainsboro'><B>P4. Integration of the three dimensions</B></TD></TR>
           <TR>
-            <TD BGCOLOR='gainsboro'><B>Expected analytical implications</B></TD>
-          </TR>
-          <TR>
-            <TD ALIGN='LEFT'>
-              (D1) Greater intelligibility of the territory<BR ALIGN='LEFT'/>
-              (D2) More consistent support for decision-making<BR ALIGN='LEFT'/>
-              (D3) Stronger territorial activation and management of territorial attractiveness
+            <TD>
+              Frugal evaluation requires articulating<BR/>
+              functional fit, resource efficiency,<BR/>
+              and strategic coherence.
             </TD>
           </TR>
         </TABLE>
       >
     ]
-
-    functional_adequacy -> evaluation [xlabel = 'P1']
-    resource_efficiency -> evaluation [xlabel = 'P2']
-    strategic_coherence -> evaluation [xlabel = 'P3']
-
-    functional_adequacy -> p4node [style = dashed, arrowhead = none]
-    resource_efficiency -> p4node [style = dashed, arrowhead = none]
-    strategic_coherence -> p4node [style = dashed, arrowhead = none]
-    p4node -> evaluation [style = dashed]
-
-    evaluation -> implications
   }
 
-  tensions -> lens [weight = 20]
-
-  lens -> functional_adequacy [
-    lhead = cluster_framework,
-    weight = 20,
-    minlen = 1
+  evaluation [
+    label = <
+      <TABLE BORDER='1' CELLBORDER='0' CELLSPACING='0' CELLPADDING='10'>
+        <TR>
+          <TD BGCOLOR='gainsboro'>
+            <B>Frugal evaluation of recommender systems<BR/>
+            in territorial marketing</B>
+          </TD>
+        </TR>
+      </TABLE>
+    >
   ]
 
-  source_note [
-    label = <Source: author&#39;s own elaboration (2026).>,
+  outcomes [
+    label = <
+      <TABLE BORDER='1' CELLBORDER='0' CELLSPACING='0' CELLPADDING='8'>
+        <TR><TD BGCOLOR='gainsboro'><B>Expected analytical outcomes</B></TD></TR>
+        <TR>
+          <TD ALIGN='LEFT'>
+            (D1) Greater intelligibility of the territory<BR ALIGN='LEFT'/>
+            (D2) More consistent support for decision-making<BR ALIGN='LEFT'/>
+            (D3) Strengthened activation and management of territorial attractiveness
+          </TD>
+        </TR>
+      </TABLE>
+    >
+  ]
+
+  source [
+    label = 'Source: author’s elaboration (2026).',
     shape = plaintext,
     fontname = 'Times New Roman',
     fontsize = 12
   ]
 
-  implications -> source_note [style = invis, weight = 20]
+  # Main conceptual flow
+  tensions -> lens
+
+  # Frugality reorganizes the framework as a whole, not only resource efficiency.
+  lens -> functional_fit
+  lens -> resource_efficiency
+  lens -> strategic_coherence
+
+  # Dimensions and corresponding propositions
+  functional_fit -> p1
+  resource_efficiency -> p2
+  strategic_coherence -> p3
+
+  # P4 synthesizes the articulation among the three dimensions.
+  p1 -> p4
+  p2 -> p4
+  p3 -> p4
+
+  # Evaluative result and analytical outcomes
+  p4 -> evaluation
+  evaluation -> outcomes
+  outcomes -> source [style = invis]
 }
 ")
 
-# 6) Display in Viewer
+# 5) Display in the Viewer
 g
 
-# 7) Export to SVG
+# 6) Export to SVG
 svg_code <- export_svg(g)
-writeLines(svg_code, svg_file)
+writeLines(svg_code, svg_file, useBytes = TRUE)
 
-# 8) Export to PNG
+# 7) Export to PNG
 rsvg_png(
   charToRaw(svg_code),
   file = png_file,
-  width = 4000,
-  height = 3000
+  width = 4200,
+  height = 3200
 )
 
-# 9) Show where files were saved
+# 8) Report output paths
 cat("\n============================================\n")
 cat("FILES SAVED SUCCESSFULLY\n")
 cat("============================================\n")
@@ -273,9 +294,8 @@ cat("SVG exists? ", file.exists(svg_file), "\n")
 cat("PNG exists? ", file.exists(png_file), "\n")
 cat("============================================\n\n")
 
-# 10) Open folder and image on Windows
+# 9) Open the folder and image on Windows
 if (.Platform$OS.type == "windows") {
   shell.exec(output_dir)
   shell.exec(png_file)
 }
-
