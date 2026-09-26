@@ -47,19 +47,19 @@ dados <- dados %>%
 # 4. CLASSIFICATION RULES
 ############################################################
 
-rs <- str_detect(text_all,
+rs <- str_detect(dados$text_all,
                  regex("recommender|recommendation|collaborative filtering|ranking|poi", TRUE))
 
-territorial <- str_detect(text_all,
+territorial <- str_detect(dados$text_all,
                           regex("spatial|geograph|territor|location|gis|proximity", TRUE))
 
-frugal <- str_detect(text_all,
+frugal <- str_detect(dados$text_all,
                      regex("frugal|green ai|efficien|energy|computational cost", TRUE))
 
-marketing <- str_detect(text_all,
+marketing <- str_detect(dados$text_all,
                         regex("marketing|consumer|customer|retail|decision", TRUE))
 
-peripheral <- str_detect(text_all,
+peripheral <- str_detect(dados$text_all,
                          regex("medicine|health|music|movie|fashion|tourism|hospital", TRUE))
 
 ############################################################

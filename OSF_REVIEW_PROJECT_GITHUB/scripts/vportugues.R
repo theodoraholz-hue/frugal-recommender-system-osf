@@ -295,7 +295,7 @@ cat("PNG existe? ", file.exists(png_file), "\n")
 cat("============================================\n\n")
 
 # 9) Abrir a pasta e a imagem no Windows
-if (.Platform$OS.type == "windows") {
+if (interactive() && .Platform$OS.type == "windows") {
   shell.exec(output_dir)
   shell.exec(png_file)
 }
